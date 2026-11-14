@@ -2,6 +2,113 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <style>
+        /* Beautiful gradient that slowly shifts */
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+            overflow: hidden; /* Prevent scrolls on mobile */
+            position: relative;
+        }
+
+        /* Animation for the shifting gradient */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Styling for the floating card */
+        .card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 2; /* Keeps the text above the hearts */
+        }
+
+        h1 { color: #e73c7e; font-size: 2.5rem; }
+
+        /* The container for the falling hearts */
+        .heart-fall {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Hearts fall behind the card */
+            overflow: hidden;
+        }
+
+        /* Style for individual falling hearts */
+        .heart-fall span {
+            position: absolute;
+            color: #ff0000; /* Red Hearts */
+            font-size: 1.5rem;
+            animation: fall 5s linear infinite;
+        }
+
+        /* Animation for the hearts to fall and spin */
+        @keyframes fall {
+            0% { top: -10px; transform: rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { top: 110%; transform: rotate(360deg); opacity: 0.1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- This is the element where we'll dynamically add hearts -->
+    <div class="heart-fall" id="hearts-container"></div>
+
+    <div class="card">
+        <h1>I love you! ❤️</h1>
+    </div>
+
+    <script>
+        // Start the classic pop-up alert
+        setTimeout(() => {
+            alert("I love you! ❤️");
+        }, 500);
+
+        // JavaScript to generate random falling hearts
+        function createHeart() {
+            const container = document.getElementById('hearts-container');
+            const heart = document.createElement('span');
+            heart.textContent = '❤️';
+            
+            // Random start position, speed, and size
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
+            heart.style.opacity = Math.random() * 0.5 + 0.2; // Keep them slightly transparent
+
+            container.appendChild(heart);
+
+            // Remove the heart after it finishes falling to keep the browser fast
+            setTimeout(() => {
+                heart.remove();
+            }, 6000); // matches the animation time plus buffer
+        }
+
+        // Keep generating new hearts every second
+        setInterval(createHeart, 250);
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <title>Special Message</title>
 </head>
 <body>
